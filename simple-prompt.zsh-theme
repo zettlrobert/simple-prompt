@@ -54,4 +54,12 @@ chevronRight=""
 cmdPrompt="%(?:%F{2}${chevronRight} :%F{1}${chevronRight} )"
 git_info="\$vcs_info_msg_0_"
 
-PROMPT="${machine} ${at} ${relativeHome} ${git_info} ${carriageReturn}${cmdPrompt}"
+# tput setaf to set to terminal color 0
+# printf command is used to format and print text to the terminal
+# The %*s format specifier is used to print a string, where the * indicates that the width of the string should be specified as an argument
+# The ${COLUMNS:-$(tput cols)} expression is used to determine the width of the terminal window.
+# The COLUMNS variable is set by the shell to the number of columns in the terminal window, and the tput cols command retrieves the number of columns in the terminal window. The :- operator is used to set a default value for the COLUMNS variable if it is not set. In this case, the default value is the output of the tput cols command, which retrieves the number of columns in the terminal window.
+# the tr command is used to replace all spaces in the input string with -
+separation_line=$(tput setaf 0; printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -)
+
+PROMPT="${separation_line}${machine} ${at} ${relativeHome} ${git_info} ${carriageReturn}${cmdPrompt}"
