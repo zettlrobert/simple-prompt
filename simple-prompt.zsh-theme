@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Load Version Control Information, even if it already loaded, z specified Z shell script
 autoload -Uz vcs_info
 
